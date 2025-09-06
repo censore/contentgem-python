@@ -48,6 +48,6 @@ setup(
     project_urls={
         "Bug Reports": "https://github.com/gemcontent/gemcontent-python/issues",
         "Source": "https://github.com/gemcontent/gemcontent-python",
-        "Documentation": "https://docs.gemcontent.com/api",
+        "Documentation": "https://gemcontent.com/api-documentation",
     },
 ) 

@@ -49,7 +49,7 @@ dev = [
 
 [project.urls]
 Homepage = "https://github.com/gemcontent/gemcontent-python"
-Documentation = "https://docs.gemcontent.com/api"
+Documentation = "https://gemcontent.com/api-documentation"
 Repository = "https://github.com/gemcontent/gemcontent-python"
 "Bug Tracker" = "https://github.com/gemcontent/gemcontent-python/issues"
 "Source Code" = "https://github.com/gemcontent/gemcontent-python"
