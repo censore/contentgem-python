@@ -1,0 +1,75 @@
+name: Publish Python Package to PyPI
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      test_pypi:
+        description: "Publish to Test PyPI instead of PyPI"
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install build twine
+
+      - name: Build package
+        run: |
+          cd client-libraries/python
+          python -m build
+
+      - name: Check package
+        run: |
+          cd client-libraries/python
+          python -m twine check dist/*
+
+      - name: Publish to Test PyPI (if requested)
+        if: ${{ github.event.inputs.test_pypi == 'true' }}
+        run: |
+          cd client-libraries/python
+          python -m twine upload --repository testpypi dist/*
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          TWINE_REPOSITORY_URL: https://test.pypi.org/legacy/
+
+      - name: Publish to PyPI
+        if: ${{ github.event.inputs.test_pypi != 'true' }}
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          path: client-libraries/python/dist
+          skip-existing: true
+
+      - name: Verify installation from PyPI
+        if: ${{ github.event.inputs.test_pypi != 'true' }}
+        run: |
+          pip install contentgem-python
+          python -c "import contentgem; print(f'Successfully installed contentgem-python version {contentgem.__version__}')"
+          contentgem --help
+
+      - name: Verify installation from Test PyPI
+        if: ${{ github.event.inputs.test_pypi == 'true' }}
+        run: |
+          pip install --index-url https://test.pypi.org/simple/ contentgem-python
+          python -c "import contentgem; print(f'Successfully installed contentgem-python version {contentgem.__version__}')"
+          contentgem --help

@@ -119,11 +119,13 @@ python -m twine upload dist/*
 ### Update Version
 
 1. Update version in `contentgem/__init__.py`:
+
    ```python
    __version__ = "1.2.1"
    ```
 
 2. Update version in `setup.py`:
+
    ```python
    version="1.2.1",
    ```
@@ -133,6 +135,7 @@ python -m twine upload dist/*
 ### Semantic Versioning
 
 Follow [Semantic Versioning](https://semver.org/):
+
 - **MAJOR**: Incompatible API changes
 - **MINOR**: New functionality in a backwards compatible manner
 - **PATCH**: Backwards compatible bug fixes

@@ -32,7 +32,12 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .env
-venv/
 .venv/
-env/
-.env/
+venv/
+*.log
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

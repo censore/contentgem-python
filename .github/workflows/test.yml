@@ -1,0 +1,87 @@
+name: Test and Quality Check
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - "client-libraries/python/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "client-libraries/python/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          cd client-libraries/python
+          python -m pip install --upgrade pip
+          pip install -e .[dev]
+
+      - name: Run tests
+        run: |
+          cd client-libraries/python
+          python -m pytest tests/ -v
+
+      - name: Check code formatting
+        run: |
+          cd client-libraries/python
+          python -m black --check contentgem/ tests/ example.py
+
+      - name: Check code style
+        run: |
+          cd client-libraries/python
+          python -m flake8 contentgem/ tests/ example.py
+
+      - name: Type checking
+        run: |
+          cd client-libraries/python
+          python -m mypy contentgem/
+
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install build twine
+
+      - name: Build package
+        run: |
+          cd client-libraries/python
+          python -m build
+
+      - name: Check package
+        run: |
+          cd client-libraries/python
+          python -m twine check dist/*
+
+      - name: Test local installation
+        run: |
+          cd client-libraries/python
+          pip install dist/*.whl
+          python -c "import contentgem; print(f'Package version: {contentgem.__version__}')"
+          contentgem --help

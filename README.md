@@ -20,6 +20,14 @@ Official Python SDK for the ContentGem API v1. This SDK provides a comprehensive
 pip install contentgem-python
 ```
 
+## Development and Publishing
+
+This package is automatically published to PyPI using GitHub Actions. For development setup and publishing instructions, see:
+
+- [Quick Start Guide](QUICK_START.md) - Quick setup for local development
+- [Publishing Guide](PUBLISHING.md) - Manual publishing instructions
+- [GitHub Actions Setup](GITHUB_ACTIONS_SETUP.md) - Automated publishing setup
+
 ## API Base URL
 
 The default API base URL is `https://gemcontent.com/api/v1`. Make sure you have a valid API key with appropriate permissions for the endpoints you plan to use.
@@ -471,6 +479,5 @@ MIT License
 
 For support and questions:
 
-- Documentation: https://docs.contentgem.com
-- API Reference: https://docs.contentgem.com/api
+- Documentation / API Reference: https://contentgem.com/api-documentation
 - GitHub Issues: https://github.com/contentgem/python-sdk/issues
