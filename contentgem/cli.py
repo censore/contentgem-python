@@ -1,34 +1,34 @@
 #!/usr/bin/env python3
 """
-ContentGem CLI
+GemContent CLI
 
-Command-line interface for ContentGem Python SDK.
+Command-line interface for GemContent Python SDK.
 """
 
 import argparse
 import sys
 from typing import Optional
 
-from .client import ContentGemClient
+from .client import GemContentClient
 
 
 def main() -> None:
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(
-        description="ContentGem CLI - Command-line interface for ContentGem API",
+        description="GemContent CLI - Command-line interface for GemContent API",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  contentgem --api-key YOUR_KEY health
-  contentgem --api-key YOUR_KEY publications
-  contentgem --api-key YOUR_KEY generate "Write about AI"
+  gemcontent --api-key YOUR_KEY health
+  gemcontent --api-key YOUR_KEY publications
+  gemcontent --api-key YOUR_KEY generate "Write about AI"
         """
     )
     
     parser.add_argument(
         "--api-key",
         required=True,
-        help="Your ContentGem API key"
+        help="Your GemContent API key"
     )
     
     parser.add_argument(
@@ -52,7 +52,7 @@ Examples:
     args = parser.parse_args()
     
     try:
-        client = ContentGemClient(
+        client = GemContentClient(
             api_key=args.api_key,
             base_url=args.base_url
         )

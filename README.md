@@ -1,6 +1,6 @@
-# ContentGem Python SDK
+# GemContent Python SDK
 
-Official Python SDK for the ContentGem API v1. This SDK provides a comprehensive interface to interact with ContentGem's AI-powered content generation platform.
+Official Python SDK for the GemContent API v1. This SDK provides a comprehensive interface to interact with GemContent's AI-powered content generation platform.
 
 ## Features
 
@@ -17,9 +17,8 @@ Official Python SDK for the ContentGem API v1. This SDK provides a comprehensive
 ## Installation
 
 ```bash
-pip install contentgem-python
+pip install gemcontent-python
 ```
-
 
 ## API Base URL
 
@@ -28,10 +27,10 @@ The default API base URL is `https://gemcontent.com/api/v1`. Make sure you have 
 ## Quick Start
 
 ```python
-from contentgem import ContentGemClient, CompanyInfo, ContentPreferences
+from gemcontent import GemContentClient, CompanyInfo, ContentPreferences
 
 # Initialize the client
-client = ContentGemClient(
+client = GemContentClient(
     api_key="cg_your_api_key_here",
     base_url="https://gemcontent.com/api/v1"  # Updated base URL
 )
@@ -69,14 +68,14 @@ if result.success:
 
 ## API Reference
 
-### ContentGemClient
+### GemContentClient
 
-Main client class for interacting with the ContentGem API.
+Main client class for interacting with the GemContent API.
 
 #### Constructor
 
 ```python
-ContentGemClient(
+GemContentClient(
     api_key: str,
     base_url: str = "https://gemcontent.com/api/v1",  # Updated default URL
     timeout: int = 30
@@ -191,9 +190,9 @@ class GenerationResponse:
 ### Basic Content Generation
 
 ```python
-from contentgem import ContentGemClient, CompanyInfo, ContentPreferences
+from gemcontent import GemContentClient, CompanyInfo, ContentPreferences
 
-client = ContentGemClient(api_key="cg_your_api_key_here")
+client = GemContentClient(api_key="cg_your_api_key_here")
 
 # Simple generation
 result = client.generate_publication(
@@ -220,7 +219,7 @@ from contentgem import (
     SocialMedia
 )
 
-client = ContentGemClient(api_key="cg_your_api_key_here")
+client = GemContentClient(api_key="cg_your_api_key_here")
 
 # Detailed company information
 company_info = CompanyInfo(
@@ -282,7 +281,7 @@ if result.success:
 ```python
 from contentgem import ContentGemClient, CompanyInfo
 
-client = ContentGemClient(api_key="cg_your_api_key_here")
+client = GemContentClient(api_key="cg_your_api_key_here")
 
 company_info = CompanyInfo(
     name="Your Company",
@@ -316,7 +315,7 @@ if result.success:
 ```python
 from contentgem import ContentGemClient
 
-client = ContentGemClient(api_key="cg_your_api_key_here")
+client = GemContentClient(api_key="cg_your_api_key_here")
 
 # Upload image
 upload_result = client.upload_image(
@@ -343,7 +342,7 @@ if images.success and images.images:
 ```python
 from contentgem import ContentGemClient
 
-client = ContentGemClient(api_key="cg_your_api_key_here")
+client = GemContentClient(api_key="cg_your_api_key_here")
 
 # Check subscription
 subscription = client.get_subscription_status()
@@ -385,7 +384,7 @@ The SDK provides comprehensive error handling:
 from contentgem import ContentGemClient
 from requests.exceptions import RequestException
 
-client = ContentGemClient(api_key="cg_your_api_key_here")
+client = GemContentClient(api_key="cg_your_api_key_here")
 
 try:
     result = client.generate_publication("Write about AI")
@@ -410,7 +409,7 @@ The SDK automatically handles rate limiting. If you hit rate limits, the SDK wil
 from contentgem import ContentGemClient
 from requests.exceptions import RequestException
 
-client = ContentGemClient(api_key="cg_your_api_key_here")
+client = GemContentClient(api_key="cg_your_api_key_here")
 
 try:
     # Multiple rapid requests
@@ -431,16 +430,16 @@ The client supports context manager for automatic resource cleanup:
 ```python
 from contentgem import ContentGemClient
 
-with ContentGemClient(api_key="cg_your_api_key_here") as client:
+with GemContentClient(api_key="cg_your_api_key_here") as client:
     result = client.generate_publication("Write about AI")
     # Client is automatically closed when exiting the context
 ```
 
 ## API Authentication
 
-The SDK uses API key authentication. Get your API key from the ContentGem dashboard:
+The SDK uses API key authentication. Get your API key from the GemContent dashboard:
 
-1. Sign up for ContentGem
+1. Sign up for GemContent
 2. Navigate to API Keys section
 3. Create a new API key with appropriate permissions
 4. Use the key in your client initialization
@@ -472,5 +471,5 @@ MIT License
 
 For support and questions:
 
-- Documentation / API Reference: https://contentgem.com/api-documentation
-- GitHub Issues: https://github.com/contentgem/python-sdk/issues
+- Documentation / API Reference: https://gemcontent.com/api-documentation
+- GitHub Issues: https://github.com/gemcontent/python-sdk/issues

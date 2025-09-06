@@ -1,10 +1,10 @@
 """
-ContentGem Python SDK
+GemContent Python SDK
 
-Official Python SDK for the ContentGem API.
+Official Python SDK for the GemContent API.
 """
 
-from .client import ContentGemClient
+from .client import GemContentClient
 from .types import (
     CompanyInfo,
     ContentPreferences,
@@ -37,11 +37,11 @@ from .types import (
 )
 
 __version__ = "1.2.0"
-__author__ = "ContentGem Team"
-__email__ = "support@contentgem.com"
+__author__ = "GemContent Team"
+__email__ = "support@gemcontent.com"
 
 __all__ = [
-    "ContentGemClient",
+    "GemContentClient",
     "CompanyInfo",
     "ContentPreferences",
     "Service",

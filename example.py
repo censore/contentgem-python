@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-ContentGem Python SDK Example
+GemContent Python SDK Example
 
-This example demonstrates how to use the ContentGem Python SDK
+This example demonstrates how to use the GemContent Python SDK
 to interact with all available API endpoints.
 
 Usage:
@@ -30,8 +30,8 @@ import sys
 import time
 from typing import Optional, List, Dict, Any
 
-from contentgem import (
-    ContentGemClient, 
+from gemcontent import (
+    GemContentClient, 
     CompanyInfo, 
     ContentPreferences, 
     Service,
@@ -99,7 +99,7 @@ def create_sample_company_info() -> CompanyInfo:
     )
     
 
-def health_check_example(client: ContentGemClient) -> None:
+def health_check_example(client: GemContentClient) -> None:
     """Example: Health check."""
     print("🔍 Checking API health...")
     try:
@@ -116,7 +116,7 @@ def health_check_example(client: ContentGemClient) -> None:
         print(f"❌ Health check error: {str(e)}")
 
 
-def subscription_example(client: ContentGemClient) -> None:
+def subscription_example(client: GemContentClient) -> None:
     """Example: Get subscription status."""
     print("\n📋 Getting subscription status...")
     try:
@@ -140,7 +140,7 @@ def subscription_example(client: ContentGemClient) -> None:
         print(f"❌ Subscription error: {str(e)}")
 
 
-def generate_publication_example(client: ContentGemClient) -> None:
+def generate_publication_example(client: GemContentClient) -> None:
     """Example: Generate a single publication."""
     print("\n🤖 Generating single publication...")
     try:
@@ -188,7 +188,7 @@ def generate_publication_example(client: ContentGemClient) -> None:
         print(f"❌ Generation error: {str(e)}")
 
 
-def bulk_generation_example(client: ContentGemClient) -> None:
+def bulk_generation_example(client: GemContentClient) -> None:
     """Example: Bulk generation."""
     print("\n🚀 Bulk generation example...")
     try:
@@ -223,7 +223,7 @@ def bulk_generation_example(client: ContentGemClient) -> None:
         print(f"❌ Bulk generation error: {str(e)}")
 
         
-def publications_list_example(client: ContentGemClient) -> None:
+def publications_list_example(client: GemContentClient) -> None:
     """Example: List publications."""
     print("\n📚 Getting publications list...")
     try:
@@ -246,7 +246,7 @@ def publications_list_example(client: ContentGemClient) -> None:
         print(f"❌ Publications list error: {str(e)}")
 
 
-def publication_details_example(client: ContentGemClient, publication_id: Optional[str] = None) -> None:
+def publication_details_example(client: GemContentClient, publication_id: Optional[str] = None) -> None:
     """Example: Get specific publication details."""
     if not publication_id:
         print("\n📰 Getting publication details (requires publication ID)...")
@@ -270,7 +270,7 @@ def publication_details_example(client: ContentGemClient, publication_id: Option
         print(f"❌ Publication details error: {str(e)}")
 
 
-def images_list_example(client: ContentGemClient) -> None:
+def images_list_example(client: GemContentClient) -> None:
     """Example: List images."""
     print("\n🖼️ Getting images list...")
     try:
@@ -293,7 +293,7 @@ def images_list_example(client: ContentGemClient) -> None:
         print(f"❌ Images list error: {str(e)}")
 
 
-def upload_image_example(client: ContentGemClient, image_path: Optional[str] = None) -> None:
+def upload_image_example(client: GemContentClient, image_path: Optional[str] = None) -> None:
     """Example: Upload an image."""
     if not image_path:
         print("\n📤 Upload image example (requires image path)...")
@@ -314,7 +314,7 @@ def upload_image_example(client: ContentGemClient, image_path: Optional[str] = N
         print(f"❌ Image upload error: {str(e)}")
 
 
-def company_info_example(client: ContentGemClient) -> None:
+def company_info_example(client: GemContentClient) -> None:
     """Example: Get company information."""
     print("\n🏢 Getting company information...")
     try:
@@ -338,7 +338,7 @@ def company_info_example(client: ContentGemClient) -> None:
         print(f"❌ Company info error: {str(e)}")
 
 
-def update_company_example(client: ContentGemClient) -> None:
+def update_company_example(client: GemContentClient) -> None:
     """Example: Update company information."""
     print("\n✏️ Updating company information...")
     try:
@@ -355,7 +355,7 @@ def update_company_example(client: ContentGemClient) -> None:
         print(f"❌ Company update error: {str(e)}")
 
 
-def statistics_example(client: ContentGemClient) -> None:
+def statistics_example(client: GemContentClient) -> None:
     """Example: Get statistics overview."""
     print("\n📊 Getting statistics overview...")
     try:
@@ -382,7 +382,7 @@ def statistics_example(client: ContentGemClient) -> None:
         print(f"❌ Statistics error: {str(e)}")
 
 
-def subscription_plans_example(client: ContentGemClient) -> None:
+def subscription_plans_example(client: GemContentClient) -> None:
     """Example: Get subscription plans."""
     print("\n📦 Getting subscription plans...")
     try:
@@ -422,7 +422,7 @@ def subscription_plans_example(client: ContentGemClient) -> None:
         print(f"❌ Subscription plans error: {str(e)}")
 
 
-def subscription_limits_example(client: ContentGemClient) -> None:
+def subscription_limits_example(client: GemContentClient) -> None:
     """Example: Get subscription limits."""
     print("\n📊 Getting subscription limits...")
     try:
@@ -445,9 +445,9 @@ def subscription_limits_example(client: ContentGemClient) -> None:
         print(f"❌ Subscription limits error: {str(e)}")
 
 
-def run_all_examples(client: ContentGemClient) -> None:
+def run_all_examples(client: GemContentClient) -> None:
     """Run all examples."""
-    print("🚀 Running all ContentGem API examples...\n")
+    print("🚀 Running all GemContent API examples...\n")
     
     # Basic operations
     health_check_example(client)
@@ -473,7 +473,7 @@ def run_all_examples(client: ContentGemClient) -> None:
 def main():
     """Main function."""
     parser = argparse.ArgumentParser(
-        description="ContentGem Python SDK Example",
+        description="GemContent Python SDK Example",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__
     )
@@ -481,7 +481,7 @@ def main():
     parser.add_argument(
         "--api-key",
         required=True,
-        help="Your ContentGem API key"
+        help="Your GemContent API key"
     )
     
     parser.add_argument(
@@ -515,11 +515,11 @@ def main():
     
     # Initialize the client
     try:
-        client = ContentGemClient(
+        client = GemContentClient(
             api_key=args.api_key,
             base_url=args.base_url
         )
-        print(f"🔗 Connected to ContentGem API at {args.base_url}")
+        print(f"🔗 Connected to GemContent API at {args.base_url}")
     except Exception as e:
         print(f"❌ Failed to initialize client: {str(e)}")
         sys.exit(1)
