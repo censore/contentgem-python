@@ -14,6 +14,8 @@ from .types import (
     GenerationRequest,
     GenerationResponse,
     GenerationStatus,
+    BulkGenerationResponse,
+    BulkGenerationStatus,
     Publication,
     Image,
     SubscriptionStatus,
@@ -21,14 +23,6 @@ from .types import (
     PublicationsResponse,
     ImagesResponse,
     ApiResponse,
-    BulkGenerationRequest,
-    BulkGenerationResponse,
-    BulkGenerationStatus,
-    CompanyData,
-    CompanyResponse,
-    CompanyParsingRequest,
-    CompanyParsingResponse,
-    CompanyParsingStatus,
 )
 
 
@@ -43,7 +37,7 @@ class ContentGemClient:
     def __init__(
         self,
         api_key: str,
-        base_url: str = "https://your-domain.com/api/v1",
+        base_url: str = "https://gemcontent.com/api/v1",
         timeout: int = 30,
     ):
         """
@@ -51,7 +45,7 @@ class ContentGemClient:
         
         Args:
             api_key: Your ContentGem API key
-            base_url: API base URL (default: https://your-domain.com/api/v1)
+            base_url: API base URL (default: https://gemcontent.com/api/v1)
             timeout: Request timeout in seconds (default: 30)
         """
         self.api_key = api_key
@@ -428,18 +422,46 @@ class ContentGemClient:
         return self._make_request("GET", "/statistics/images")
 
     def bulk_generate_publications(
-        self, request: BulkGenerationRequest
+        self,
+        prompts: List[str],
+        company_info: Optional[Union[CompanyInfo, Dict[str, Any]]] = None,
+        common_settings: Optional[Dict[str, Any]] = None,
+        keywords: Optional[List[str]] = None,
     ) -> BulkGenerationResponse:
         """
         Bulk generate multiple publications.
         
         Args:
-            request: Bulk generation request
+            prompts: List of generation prompts
+            company_info: Company information
+            common_settings: Common settings for all publications
+            keywords: Keywords for generation
             
         Returns:
             Bulk generation response
         """
-        response = self._make_request("POST", "/publications/bulk-generate", json=request.to_dict())
+        
+        # Correct structure for bulk generation API
+        request_data = {"prompts": prompts}
+        
+        # Build settings object
+        settings = {}
+        if company_info:
+            if isinstance(company_info, CompanyInfo):
+                settings["company_info"] = company_info.to_dict()
+            else:
+                settings["company_info"] = company_info
+                
+        if common_settings:
+            settings.update(common_settings)
+            
+        if keywords:
+            settings["keywords"] = keywords
+            
+        if settings:
+            request_data["settings"] = settings
+            
+        response = self._make_request("POST", "/publications/bulk-generate", json=request_data)
         return BulkGenerationResponse(**response)
 
     def check_bulk_generation_status(self, bulk_session_id: str) -> BulkGenerationStatus:
@@ -447,25 +469,28 @@ class ContentGemClient:
         Check bulk generation status.
         
         Args:
-            bulk_session_id: Bulk session ID
+            bulk_session_id: Bulk generation session ID
             
         Returns:
             Bulk generation status
         """
-        response = self._make_request("POST", "/publications/bulk-status", json={"bulk_session_id": bulk_session_id})
+        
+        response = self._make_request(
+            "POST", "/publications/bulk-status", 
+            json={"bulk_session_id": bulk_session_id}
+        )
         return BulkGenerationStatus(**response)
 
-    def get_company_info(self) -> CompanyResponse:
+    def get_company_info(self) -> ApiResponse:
         """
         Get company information.
         
         Returns:
             Company information
         """
-        response = self._make_request("GET", "/company")
-        return CompanyResponse(**response)
+        return self._make_request("GET", "/company")
 
-    def update_company_info(self, company_data: CompanyData) -> CompanyResponse:
+    def update_company_info(self, company_data: Dict[str, Any]) -> ApiResponse:
         """
         Update company information.
         
@@ -475,10 +500,9 @@ class ContentGemClient:
         Returns:
             Update response
         """
-        response = self._make_request("PUT", "/company", json=company_data.to_dict())
-        return CompanyResponse(**response)
+        return self._make_request("PUT", "/company", json=company_data)
 
-    def parse_company_website(self, website_url: str) -> CompanyParsingResponse:
+    def parse_company_website(self, website_url: str) -> ApiResponse:
         """
         Parse company website.
         
@@ -488,50 +512,19 @@ class ContentGemClient:
         Returns:
             Parsing response
         """
-        request = CompanyParsingRequest(website_url=website_url)
-        response = self._make_request("POST", "/company/parse", json=request.to_dict())
-        return CompanyParsingResponse(**response)
+        return self._make_request(
+            "POST", "/company/parse", 
+            json={"website_url": website_url}
+        )
 
-    def get_company_parsing_status(self) -> CompanyParsingStatus:
+    def get_company_parsing_status(self) -> ApiResponse:
         """
         Get company parsing status.
         
         Returns:
             Parsing status
         """
-        response = self._make_request("GET", "/company/parsing-status")
-        return CompanyParsingStatus(**response)
-
-    def wait_for_bulk_generation(
-        self, bulk_session_id: str, max_attempts: int = 120, delay_seconds: int = 10
-    ) -> BulkGenerationStatus:
-        """
-        Wait for bulk generation to complete.
-        
-        Args:
-            bulk_session_id: Bulk session ID
-            max_attempts: Maximum number of attempts
-            delay_seconds: Delay between attempts in seconds
-            
-        Returns:
-            Final bulk generation status
-            
-        Raises:
-            TimeoutError: If generation times out
-        """
-        for attempt in range(max_attempts):
-            status = self.check_bulk_generation_status(bulk_session_id)
-            
-            if status.is_completed:
-                return status
-                
-            if status.is_failed:
-                raise Exception("Bulk generation failed")
-                
-            if attempt < max_attempts - 1:
-                time.sleep(delay_seconds)
-                
-        raise TimeoutError("Bulk generation timeout")
+        return self._make_request("GET", "/company/parsing-status")
 
     def health_check(self) -> ApiResponse:
         """
