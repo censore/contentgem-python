@@ -20,13 +20,6 @@ Official Python SDK for the ContentGem API v1. This SDK provides a comprehensive
 pip install contentgem-python
 ```
 
-## Development and Publishing
-
-This package is automatically published to PyPI using GitHub Actions. For development setup and publishing instructions, see:
-
-- [Quick Start Guide](QUICK_START.md) - Quick setup for local development
-- [Publishing Guide](PUBLISHING.md) - Manual publishing instructions
-- [GitHub Actions Setup](GITHUB_ACTIONS_SETUP.md) - Automated publishing setup
 
 ## API Base URL
 
