@@ -1,5 +1,5 @@
 import pytest
-from contentgem import (
+from gemcontent import (
     CompanyInfo, GenerationRequest, GenerationResponse, 
     GenerationStatus, Publication, Image, SubscriptionStatus,
     StatisticsOverview

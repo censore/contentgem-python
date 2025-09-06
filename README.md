@@ -209,7 +209,7 @@ if result.success:
 ### Advanced Content Generation with Company Context
 
 ```python
-from contentgem import (
+from gemcontent import (
     ContentGemClient,
     CompanyInfo,
     ContentPreferences,

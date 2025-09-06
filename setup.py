@@ -4,14 +4,14 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="contentgem-python",
+    name="gemcontent-python",
     version="1.0.0",
-    author="ContentGem Team",
-    author_email="support@contentgem.com",
-    description="Official Python SDK for ContentGem API",
+    author="GemContent Team",
+    author_email="support@gemcontent.com",
+    description="Official Python SDK for GemContent API",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/contentgem/contentgem-python",
+    url="https://github.com/gemcontent/gemcontent-python",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -44,10 +44,10 @@ setup(
             "sphinx-rtd-theme>=0.5.0",
         ]
     },
-    keywords="contentgem, api, sdk, python, content-generation, ai",
+    keywords="gemcontent, api, sdk, python, content-generation, ai",
     project_urls={
-        "Bug Reports": "https://github.com/contentgem/contentgem-python/issues",
-        "Source": "https://github.com/contentgem/contentgem-python",
-        "Documentation": "https://docs.contentgem.com/api",
+        "Bug Reports": "https://github.com/gemcontent/gemcontent-python/issues",
+        "Source": "https://github.com/gemcontent/gemcontent-python",
+        "Documentation": "https://docs.gemcontent.com/api",
     },
 ) 

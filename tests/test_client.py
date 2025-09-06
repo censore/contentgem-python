@@ -1,7 +1,7 @@
 import pytest
 import responses
 from unittest.mock import patch, Mock
-from contentgem import ContentGemClient, CompanyInfo, GenerationRequest
+from gemcontent import GemContentClient, CompanyInfo, GenerationRequest
 
 
 class TestContentGemClient:

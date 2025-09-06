@@ -2,9 +2,9 @@ include README.md
 include LICENSE
 include CHANGELOG.md
 include pyproject.toml
-include contentgem/py.typed
+include gemcontent/py.typed
 
-recursive-include contentgem *.py
+recursive-include gemcontent *.py
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
 recursive-exclude * *.so

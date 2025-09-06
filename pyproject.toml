@@ -3,18 +3,18 @@ requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "contentgem-python"
+name = "gemcontent-python"
 dynamic = ["version"]
-description = "Official Python SDK for ContentGem API"
+description = "Official Python SDK for GemContent API"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "ContentGem Team", email = "support@contentgem.com"}
+    {name = "GemContent Team", email = "support@gemcontent.com"}
 ]
 maintainers = [
-    {name = "ContentGem Team", email = "support@contentgem.com"}
+    {name = "GemContent Team", email = "support@gemcontent.com"}
 ]
-keywords = ["contentgem", "api", "sdk", "python", "content-generation", "ai"]
+keywords = ["gemcontent", "api", "sdk", "python", "content-generation", "ai"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -48,23 +48,23 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/contentgem/contentgem-python"
-Documentation = "https://docs.contentgem.com/api"
-Repository = "https://github.com/contentgem/contentgem-python"
-"Bug Tracker" = "https://github.com/contentgem/contentgem-python/issues"
-"Source Code" = "https://github.com/contentgem/contentgem-python"
+Homepage = "https://github.com/gemcontent/gemcontent-python"
+Documentation = "https://docs.gemcontent.com/api"
+Repository = "https://github.com/gemcontent/gemcontent-python"
+"Bug Tracker" = "https://github.com/gemcontent/gemcontent-python/issues"
+"Source Code" = "https://github.com/gemcontent/gemcontent-python"
 
 [project.scripts]
-contentgem = "contentgem.cli:main"
+gemcontent = "gemcontent.cli:main"
 
 [tool.setuptools]
-packages = ["contentgem"]
+packages = ["gemcontent"]
 
 [tool.setuptools.package-data]
-contentgem = ["py.typed"]
+gemcontent = ["py.typed"]
 
 [tool.setuptools_scm]
-write_to = "contentgem/_version.py"
+write_to = "gemcontent/_version.py"
 
 [tool.black]
 line-length = 88
